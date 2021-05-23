@@ -1,11 +1,11 @@
-class RecipesController < ApplicationController
+class Api::V1::RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :update, :destroy]
 
   # GET /recipes
   def index
-    @recipes = Recipe.all
+    recipes = Recipe.all
 
-    render json: @recipes
+    render json: recipes
   end
 
   # GET /recipes/1
@@ -39,13 +39,14 @@ class RecipesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_recipe
-      @recipe = Recipe.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def recipe_params
-      params.require(:recipe).permit(:title, :image_url, :ingredients, :instructions, :category_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def recipe_params
+    params.require(:recipe).permit(:title, :image_url, :ingredients, :instructions, :category_id)
+  end
 end
