@@ -19,7 +19,7 @@ class Api::V1::RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
 
     if @recipe.save
-      render json: @recipe, status: :created, location: @recipe
+      render json: RecipeSerializer.new(@recipe), status: :created
     else
       render json: @recipe.errors.full_messages, status: :unprocessable_entity
     end
